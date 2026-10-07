@@ -1,6 +1,3 @@
-/*
-  Guía 10 — Nosotros con Bootstrap Container/Row/Col.
-*/
 
 import { Col, Container, Row } from 'react-bootstrap'
 

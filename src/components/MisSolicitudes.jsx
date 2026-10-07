@@ -1,5 +1,5 @@
 /*
-  Guía 10 — MisSolicitudes con clases Bootstrap.
+  MisSolicitudes con clases Bootstrap.
 
   Patrón equivalente en conecta-cultura: MisInscripciones.jsx
 */

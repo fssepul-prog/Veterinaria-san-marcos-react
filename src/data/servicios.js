@@ -1,6 +1,4 @@
 /*
-  Guía 9 — Paso 4: Archivo de datos simulado.
-
   En la versión HTML original, los datos de servicios estaban
   escritos directamente en el HTML (texto estático) o en scripts JS sueltos.
 

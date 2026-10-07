@@ -1,5 +1,5 @@
 /*
-  Guía 9 — Paso 5: Componente funcional Cabecera.
+  Componente funcional Cabecera.
 
   En la versión HTML original, el <header> se repetía en cada página .html.
   En React, se convierte en un componente reutilizable: se escribe una sola vez

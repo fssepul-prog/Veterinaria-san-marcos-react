@@ -1,60 +1,43 @@
-/*
-  Guía 10 — Componente raíz App con navegación por estado.
+//Se importa el sistema de rutas de react router para definir la navegacion de la plataforma
 
-  Sin React Router (Guía 11), la página visible se controla con useState.
-  paginaActual es un string que indica qué componente renderizar.
-
-  Patrones de Guía 10 aplicados:
-    - useState para paginaActual (navegación sin router)
-    - Renderizado condicional con función renderPagina()
-    - onCambiarPagina se pasa como prop a Navegacion
-
-  NOTA GUÍA 11: en la Guía 11, useState + renderPagina() serán reemplazados
-  por <BrowserRouter> y <Routes> de react-router-dom.
-*/
-
-import { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import Navegacion from './components/Navegacion'
 import PiePagina from './components/PiePagina'
 import Inicio from './pages/Inicio'
 import Nosotros from './pages/Nosotros'
 import Servicios from './pages/Servicios'
+import DetalleServicio from './pages/DetalleServicio'
+import Agenda from './pages/Agenda'
 import Recursos from './pages/Recursos'
+import Citas from './pages/Citas'
+import Ingreso from './pages/Ingreso'
+import Registro from './pages/Registro'
+import NoEncontrada from './pages/NoEncontrada'
 
+//definicion de rutas que funcionaran de manera conjunta con BrowserRouter
+//tanto Navegacion como PiePagina estan siempre activas, y dependiendo del enrutamiento, el "body" de la pagina cambia segun la solicitud del usuario
 function App() {
-  /*
-    Estado de navegación: determina qué página se muestra.
-    Valor inicial 'inicio' → se muestra la página de inicio al cargar.
-  */
-  const [paginaActual, setPaginaActual] = useState('inicio')
-
-  /*
-    Selecciona el componente de página según el estado actual.
-    Renderizado condicional equivalente al switch de rutas en React Router.
-    Las páginas Agenda y Citas se agregarán en etapas siguientes.
-  */
-  function renderPagina() {
-    if (paginaActual === 'nosotros')  return <Nosotros />
-    if (paginaActual === 'servicios') return <Servicios />
-    if (paginaActual === 'recursos')  return <Recursos />
-    return <Inicio />
-  }
-
-  return (
-    <>
-      {/*
-        Se pasan dos props a Navegacion:
-          paginaActual   → para marcar el enlace activo (aria-current)
-          onCambiarPagina → para que el menú pueda cambiar el estado
-      */}
-      <Navegacion
-        paginaActual={paginaActual}
-        onCambiarPagina={setPaginaActual}
-      />
-      {renderPagina()}
-      <PiePagina />
-    </>
-  )
+    return (
+        <>
+            <Navegacion />
+            <Routes>
+                <Route path="/"                element={<Inicio />} />
+                <Route path="/nosotros"        element={<Nosotros />} />
+                <Route path="/servicios"       element={<Servicios />} />
+                {/*A la capa de servicios se le otorga un parametro dinamico "id"
+                para identificar un servicio en particular*/}
+                <Route path="/servicios/:id"   element={<DetalleServicio />} />
+                <Route path="/agenda"          element={<Agenda />} />
+                <Route path="/recursos"        element={<Recursos />} />
+                <Route path="/citas"           element={<Citas />} />
+                <Route path="/ingreso"         element={<Ingreso />} />
+                <Route path="/registro"        element={<Registro />} />
+                {/* Captura cualquier ruta no definida y muestra la página 404 */}
+                <Route path="*"                element={<NoEncontrada />} />
+            </Routes>
+            <PiePagina />
+        </>
+    )
 }
 
 export default App

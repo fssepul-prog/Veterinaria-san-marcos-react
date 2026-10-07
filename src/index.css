@@ -1,14 +1,3 @@
-/*
-  Hoja de estilos global — Guía 10.
-
-  Bootstrap se carga primero en main.jsx, por lo que las reglas de aquí
-  pueden sobrescribir sus valores por defecto.
-
-  Se mantienen los colores y tipografía propios de Veterinaria San Marcos,
-  sobreescribiendo las variables CSS de Bootstrap para que los componentes
-  bg-dark, btn-success, etc. usen la paleta verde de la clínica.
-*/
-
 /* ─── 1. Variables de diseño (paleta veterinaria) ──────────────── */
 :root {
   /* Paleta propia */
@@ -43,10 +32,6 @@ h1, h2, h3 {
 }
 
 /* ─── 3. Navbar veterinaria ────────────────────────────────────── */
-/*
-  Bootstrap bg-dark usa --bs-dark, que ya sobreescribimos arriba.
-  Estos ajustes aseguran que el texto y los links sean blancos.
-*/
 .navbar-vet {
   background-color: var(--color-primario-oscuro) !important;
 }
@@ -144,4 +129,29 @@ h1, h2, h3 {
 /* ─── 10. Tabla de precios ──────────────────────────────────────── */
 .tabla-contenedor {
   overflow-x: auto;
+}
+
+/* ─── 11. Botones de autenticación en la navbar ─────────────────── */
+.btn-nav-auth {
+  padding: 0.3rem 0.9rem !important;
+  border-radius: 0.4rem !important;
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.btn-nav-auth:hover,
+.btn-nav-auth.active {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+}
+
+.btn-nav-registro {
+  background-color: var(--color-primario) !important;
+  border-color: var(--color-primario) !important;
+}
+
+.btn-nav-registro:hover {
+  background-color: var(--color-primario-oscuro) !important;
+  border-color: var(--color-primario-oscuro) !important;
 }

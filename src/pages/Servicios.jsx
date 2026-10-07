@@ -1,9 +1,4 @@
-/*
-  Guía 10 — Servicios con Bootstrap Container/Row/Col y patrones de estado.
 
-  Patrones Guía 10: useState, useEffect, localStorage, .filter(), .some(), .map()
-  Patrón equivalente en conecta-cultura: Actividades.jsx
-*/
 
 import { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'

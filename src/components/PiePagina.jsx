@@ -1,12 +1,13 @@
 /*
-  Guía 10 — PiePagina con Bootstrap.
+  PiePagina con Bootstrap.
 
   Patrón equivalente en conecta-cultura: PiePagina.jsx
   Se usa bg-dark (que apunta a --bs-dark, sobreescrito al verde oscuro
-  de la veterinaria en index.css) igual que conecta-cultura usa bg-dark.
+  de la veterinaria en index.css).
 */
 
 import { Col, Container, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 function PiePagina() {
   return (

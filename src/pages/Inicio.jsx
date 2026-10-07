@@ -1,49 +1,55 @@
-/*
-  Guía 10 — Inicio con Bootstrap Container/Row/Col y estado real.
-*/
-
+//Sección principal de la pagina web, se muestran los apartados destacados de esta
 import { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
+//el vinculo link es el remplazo a la etiqueta <a href>, permitiendo asi la navegacion sin recargas
+import { Link } from 'react-router-dom'
 import TarjetaServicio from '../components/TarjetaServicio'
 import MisSolicitudes from '../components/MisSolicitudes'
 import { servicios } from '../data/servicios'
 
-function Inicio() {
-  const serviciosDestacados = servicios.slice(0, 3)
 
-  const [solicitudes, setSolicitudes] = useState(() => {
-    const guardadas = localStorage.getItem('solicitudes')
-    return guardadas ? JSON.parse(guardadas) : []
-  })
+  function Inicio() {
 
-  function manejarAgendar(servicio) {
-    const yaExiste = solicitudes.some((item) => item.id === servicio.id)
-    if (yaExiste) return
-    setSolicitudes([...solicitudes, servicio])
-  }
+    //muestra unicamente los primeros 3 elementos de la biblioteca de "servicios.js"
+    const serviciosDestacados = servicios.slice(0, 3)
+    //se inicializa el estado de solicitudes, al interactuar con esta, se guardan los datos "solicitudes", la informacion se recupera al actualizar la pagina
+    //ya que esta se esta guardando en el localStorage del navegador
+    //RECORDAR QUE =>  ES UNA FUNCION DE COMPARACION, ASI QUE BASICAMENTE YO REVISO SI EXISTE ALGO EN EL LOCALSTORAGE CON CLAVE DE SOLICITUDES,
+    //SI EXISTE ALGO, ESTE TEXTO PASA A UN ARREGLO MEDIANTE JSON.PARSE Y LO CONVIERTE EN UN VALOR INICIAL
+    //SI NO HAY NADA, RETORNA UN ARREGLO VACIO, ESTO SE PUEDE VER EN return guardadas ? JSON.parse(guardadas) : []  , RECORDAR QUE ? ES UN OPERADOR TERNARIO, ESTE EQUIVALE A UN IF/ELSE
+    const [solicitudes, setSolicitudes] = useState(() => {
+      const guardadas = localStorage.getItem('solicitudes')
+      return guardadas ? JSON.parse(guardadas) : []
+    })
+    //Agrega un servicio a la lista de solicitudes, pero antes verifica con some si ese servicio ya fue agendado.
+    // Si ya existe simplemente no hace nada (return). Si no existe lo agrega al arreglo.
+    function manejarAgendar(servicio) {
+      const yaExiste = solicitudes.some((item) => item.id === servicio.id)
+      if (yaExiste) return
+      setSolicitudes([...solicitudes, servicio])
+    }
+    // Elimina un servicio de la lista usando filter, descartando el elemento cuyo id coincida con el recibido.
+    function manejarEliminar(id) {
+      setSolicitudes(solicitudes.filter((item) => item.id !== id))
+    }
+    //Cada vez que la lista de solicitudes cambia, guarda automáticamente el estado actualizado en localStorage con JSON.stringify.
+    // Así los datos persisten aunque el usuario recargue la página.
+    useEffect(() => {
+      localStorage.setItem('solicitudes', JSON.stringify(solicitudes))
+    }, [solicitudes])
 
-  function manejarEliminar(id) {
-    setSolicitudes(solicitudes.filter((item) => item.id !== id))
-  }
-
-  useEffect(() => {
-    localStorage.setItem('solicitudes', JSON.stringify(solicitudes))
-  }, [solicitudes])
 
   return (
     <main>
       <Container className="py-4">
-
-        {/* ── Hero ── */}
+        {/* ── Portada inicio ── */}
         <section className="presentacion mb-5">
           <div>
             <p className="etiqueta">Clínica veterinaria en Rancagua</p>
-            <h1>Cuidamos a tu mascota como parte de tu familia</h1>
+            <h1>El bienestar de tus mascotas son nuestra prioridad.</h1>
             <p>
-              Acompañamos a las familias de Rancagua y a sus mascotas desde 2009.
-              Nuestro equipo de especialistas está presente en cada etapa: prevenir
-              enfermedades, resolverlas a tiempo y ayudarte a disfrutar de tu
-              regalón sano y feliz.
+              Acompañamos a las familias de Rancagua y a sus mascotas desde 2009. Nuestro equipo de especialistas estará contigo en cada etapa: prevención de enfermedades,
+              tratamientos e información oportuna, para que disfrutes de tu regalón sano y feliz.
             </p>
             <div className="d-flex flex-wrap gap-2 mt-3">
               <a className="btn btn-success" href="#citas">Solicitar una hora</a>
@@ -73,9 +79,8 @@ function Inicio() {
         <aside className="aviso mb-4" aria-labelledby="titulo-aviso">
           <h2 id="titulo-aviso">¿Sabías que puedes agendar en línea?</h2>
           <p>
-            Ya no es necesario llamar por teléfono ni presentarte en la clínica.
-            Completa el formulario de solicitud de hora y te confirmaremos la
-            fecha disponible.
+            Agenda tu hora sin llamar ni ir a la clínica.
+            Solo llena el formulario de solicitud y te confirmaremos la fecha disponible.
           </p>
         </aside>
 

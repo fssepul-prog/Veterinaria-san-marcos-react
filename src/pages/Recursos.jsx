@@ -1,7 +1,4 @@
-/*
-  Guía 10 — Recursos con Bootstrap Container/Row/Col.
-*/
-
+//apartado referente a informacion para la tenencia responsable
 import { Col, Container, Row } from 'react-bootstrap'
 
 function Recursos() {
