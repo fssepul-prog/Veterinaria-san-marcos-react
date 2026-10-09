@@ -19,6 +19,7 @@ import App from './App.jsx'
   Esto ayuda a mantener una interfaz fluida y rapida(ya que esta no presenta recargas)
 
 */
+
 createRoot(document.getElementById('root')).render(
     <StrictMode>
         <BrowserRouter>

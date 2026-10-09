@@ -13,6 +13,13 @@ import Citas from './pages/Citas'
 import Ingreso from './pages/Ingreso'
 import Registro from './pages/Registro'
 import NoEncontrada from './pages/NoEncontrada'
+import AdminUsuarios from "./pages/AdminUsuarios";
+import AdminServicios from "./pages/AdminServicios";
+import AdminCitas from "./pages/AdminCitas";
+import AdminReportes from "./pages/AdminReportes";
+import AdminHistorial from "./pages/AdminHistorial";
+
+
 
 //definicion de rutas que funcionaran de manera conjunta con BrowserRouter
 //tanto Navegacion como PiePagina estan siempre activas, y dependiendo del enrutamiento, el "body" de la pagina cambia segun la solicitud del usuario
@@ -34,6 +41,11 @@ function App() {
                 <Route path="/registro"        element={<Registro />} />
                 {/* Captura cualquier ruta no definida y muestra la página 404 */}
                 <Route path="*"                element={<NoEncontrada />} />
+                <Route path="/usuariosAdmin" element={<AdminUsuarios />} />
+                <Route path="/serviciosAdmin" element={<AdminServicios />} />
+                <Route path="/citasAdmin" element={<AdminCitas />} />
+                <Route path="/reportesAdmin" element={<AdminReportes />} />
+
             </Routes>
             <PiePagina />
         </>
