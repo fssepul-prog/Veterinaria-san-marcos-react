@@ -13,11 +13,13 @@ import Citas from './pages/Citas'
 import Ingreso from './pages/Ingreso'
 import Registro from './pages/Registro'
 import NoEncontrada from './pages/NoEncontrada'
-import AdminUsuarios from "./pages/AdminUsuarios";
-import AdminServicios from "./pages/AdminServicios";
-import AdminCitas from "./pages/AdminCitas";
-import AdminReportes from "./pages/AdminReportes";
-import AdminHistorial from "./pages/AdminHistorial";
+import NavegacionAdmin from "./components/NavegacionAdmin";
+import AdminUsuarios from "./pages/admin/AdminUsuarios";
+import AdminServicios from "./pages/admin/AdminServicios";
+import AdminCitas from "./pages/admin/AdminCitas";
+import AdminReportes from "./pages/admin/AdminReportes";
+import AdminHistorial from "./pages/admin/AdminHistorial";
+
 
 
 
@@ -41,10 +43,11 @@ function App() {
                 <Route path="/registro"        element={<Registro />} />
                 {/* Captura cualquier ruta no definida y muestra la página 404 */}
                 <Route path="*"                element={<NoEncontrada />} />
-                <Route path="/usuariosAdmin" element={<AdminUsuarios />} />
-                <Route path="/serviciosAdmin" element={<AdminServicios />} />
-                <Route path="/citasAdmin" element={<AdminCitas />} />
-                <Route path="/reportesAdmin" element={<AdminReportes />} />
+                <Route path="/admin/usuarios" element={<AdminUsuarios />} />
+                <Route path="/admin/servicios" element={<AdminServicios />} />
+                <Route path="/admin/citas" element={<AdminCitas />} />
+                <Route path="/admin/reportes" element={<AdminReportes />} />
+                <Route path="/admin/historial" element={<AdminHistorial />} />
 
             </Routes>
             <PiePagina />
