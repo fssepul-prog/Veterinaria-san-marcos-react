@@ -7,7 +7,7 @@
 */
 
 import { Link } from 'react-router-dom'
-function TarjetaServicio({ servicio, onAgendar }) {
+function TarjetaServicio({ servicio }) {
   return (
       <article className="card h-100">
         <div className="card-body d-flex flex-column">
@@ -34,12 +34,9 @@ function TarjetaServicio({ servicio, onAgendar }) {
             >
               Ver detalle
             </Link>
-            <button
-                className="btn btn-success btn-sm"
-                onClick={() => onAgendar(servicio)}
-            >
+            <Link to="/citas" className="btn btn-success btn-sm">
               Solicitar hora
-            </button>
+            </Link>
           </div>
         </div>
       </article>

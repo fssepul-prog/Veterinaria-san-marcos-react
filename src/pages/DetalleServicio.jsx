@@ -10,8 +10,8 @@
 
 import { useParams, Link } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
-import { servicios } from '../data/servicios'
-import NoEncontrada from './NoEncontrada'
+import { servicios } from '../data/servicios.js'
+import NoEncontrada from './NoEncontrada.jsx'
 
 function DetalleServicio() {
   const { id } = useParams()

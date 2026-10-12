@@ -11,13 +11,15 @@
   - El componente debe retornar un único elemento raíz (aquí <header>).
 */
 
+import { Link } from 'react-router-dom'
+
 function Cabecera() {
   return (
     <header className="cabecera-sitio">
       {/* La marca (logo + nombre) redirige al inicio */}
-      <a className="marca" href="/">
+      <Link className="marca" to="/">
         Veterinaria San Marcos
-      </a>
+      </Link>
     </header>
   )
 }

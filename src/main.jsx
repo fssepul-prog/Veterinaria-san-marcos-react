@@ -18,6 +18,14 @@ import App from './App.jsx'
   sin recargar nada. La URL cambia en la barra del navegador, pero el documento HTML es siempre el mismo.
   Esto ayuda a mantener una interfaz fluida y rapida(ya que esta no presenta recargas)
 
+  cuentas de prueba:
+
+  Administrador: admin@sanmarcos.cl / admin123
+
+  Recepcionista: recepcion@sanmarcos.cl / recep123
+
+  Cliente: cliente@sanmarcos.cl / cliente123
+
 */
 createRoot(document.getElementById('root')).render(
     <StrictMode>

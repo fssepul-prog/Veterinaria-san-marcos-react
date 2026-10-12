@@ -1,8 +1,11 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-// Configuración de Vite con el plugin de React.
-// defineConfig le dice a Vite cómo compilar el proyecto.
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
-})
+  test: {
+    environment: "jsdom",
+    setupFiles: "./src/test/setup.js",
+    globals: true,
+    css: true
+  }
+});

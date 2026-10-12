@@ -1,39 +1,18 @@
-
-
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import TarjetaServicio from '../components/TarjetaServicio'
-import MisSolicitudes from '../components/MisSolicitudes'
-import { servicios } from '../data/servicios'
+import { Link } from 'react-router-dom'
+import TarjetaServicio from '../components/TarjetaServicio.jsx'
+import { servicios } from '../data/servicios.js'
 
 const categorias = ['Todas', 'Consultas', 'Vacunación', 'Desparasitación', 'Cirugía', 'Otros']
 
 function Servicios() {
   const [categoria, setCategoria] = useState('Todas')
 
-  const [solicitudes, setSolicitudes] = useState(() => {
-    const guardadas = localStorage.getItem('solicitudes')
-    return guardadas ? JSON.parse(guardadas) : []
-  })
-
   const visibles =
     categoria === 'Todas'
       ? servicios
       : servicios.filter((s) => s.categoria === categoria)
-
-  function manejarAgendar(servicio) {
-    const yaExiste = solicitudes.some((item) => item.id === servicio.id)
-    if (yaExiste) return
-    setSolicitudes([...solicitudes, servicio])
-  }
-
-  function manejarEliminar(id) {
-    setSolicitudes(solicitudes.filter((item) => item.id !== id))
-  }
-
-  useEffect(() => {
-    localStorage.setItem('solicitudes', JSON.stringify(solicitudes))
-  }, [solicitudes])
 
   return (
     <main>
@@ -78,7 +57,7 @@ function Servicios() {
             <Row className="g-4 mt-1">
               {visibles.map((servicio) => (
                 <Col xs={12} md={6} lg={4} key={servicio.id}>
-                  <TarjetaServicio servicio={servicio} onAgendar={manejarAgendar} />
+                  <TarjetaServicio servicio={servicio} />
                 </Col>
               ))}
             </Row>
@@ -96,7 +75,7 @@ function Servicios() {
                   <th scope="col">Código</th>
                   <th scope="col">Servicio</th>
                   <th scope="col">Especie</th>
-                  <th scope="col">Duración</th>
+                  <th scope="col" className="d-none d-md-table-cell">Duración</th>
                   <th scope="col">Precio (CLP)</th>
                 </tr>
               </thead>
@@ -106,7 +85,7 @@ function Servicios() {
                     <th scope="row">{s.codigo}</th>
                     <td>{s.nombre}</td>
                     <td>{s.especie}</td>
-                    <td>{s.duracion}</td>
+                    <td className="d-none d-md-table-cell">{s.duracion}</td>
                     <td>${s.precio.toLocaleString('es-CL')}</td>
                   </tr>
                 ))}
@@ -123,9 +102,8 @@ function Servicios() {
             Completa el formulario de solicitud de hora indicando el servicio
             elegido y te confirmaremos la fecha disponible.
           </p>
+          <Link to="/citas" className="btn btn-success mt-2">Solicitar hora</Link>
         </aside>
-
-        <MisSolicitudes solicitudes={solicitudes} onEliminar={manejarEliminar} />
 
       </Container>
     </main>
