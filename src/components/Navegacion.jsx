@@ -14,18 +14,22 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 function Navegacion() {
   const location           = useLocation()
   const navigate           = useNavigate()
-  const esAdmin            = location.pathname.startsWith('/admin')
+  // true si la ruta actual pertenece al panel interno (admin o recepción)
+  const esAdmin            = location.pathname.startsWith('/admin') || location.pathname.startsWith('/recepcion')
   const [sesion, setSesion] = useState(null)
 
+  // Se ejecuta cada vez que el usuario navega a una ruta distinta
   useEffect(() => {
-    const guardada = localStorage.getItem('sesion')
+    const guardada = localStorage.getItem('sesion') // lee la sesión guardada
+    // Si existe, la convierte de texto JSON a objeto; si no, deja sesion en null
     setSesion(guardada ? JSON.parse(guardada) : null)
-  }, [location])
+  }, [location]) // location como dependencia hace que se re-ejecute en cada cambio de ruta
 
+  // Elimina la sesión y devuelve al usuario a la página de inicio
   function cerrarSesion() {
-    localStorage.removeItem('sesion')
-    setSesion(null)
-    navigate('/')
+    localStorage.removeItem('sesion') // borra la sesión del navegador
+    setSesion(null)                   // limpia el estado para que el menú se actualice
+    navigate('/')                     // redirige al inicio sin recargar la página
   }
 
   return (
@@ -33,7 +37,7 @@ function Navegacion() {
       <Container>
         <Navbar.Brand as={NavLink} to={
           sesion?.rol === 'Administrador' ? '/admin/servicios' :
-          sesion?.rol === 'Recepcionista' ? '/admin/citas' : '/'
+          sesion?.rol === 'Recepcionista' ? '/recepcion/citas' : '/'
         } className="navbar-brand-vet">
           <img
             src="/logo.png"
@@ -64,8 +68,8 @@ function Navegacion() {
                 )}
                 {sesion?.rol === 'Recepcionista' && (
                   <>
-                    <Nav.Link as={NavLink} to="/admin/citas">Citas</Nav.Link>
-                    <Nav.Link as={NavLink} to="/admin/historial">Historial</Nav.Link>
+                    <Nav.Link as={NavLink} to="/recepcion/citas">Citas</Nav.Link>
+                    <Nav.Link as={NavLink} to="/recepcion/fichas">Fichas</Nav.Link>
                   </>
                 )}
               </Nav>

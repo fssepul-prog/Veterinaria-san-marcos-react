@@ -19,12 +19,14 @@ import AdminCitas from './pages/admin/AdminCitas'
 import AdminUsuarios from './pages/admin/AdminUsuarios'
 import AdminReportes from './pages/admin/AdminReportes'
 import AdminHistorial from './pages/admin/AdminHistorial'
+import RecepcionCitas from './pages/recepcionista/RecepcionCitas'
+import RecepcionFichas from './pages/recepcionista/RecepcionFichas'
 
 //definicion de rutas que funcionaran de manera conjunta con BrowserRouter
 //tanto Navegacion como PiePagina estan siempre activas, y dependiendo del enrutamiento, el "body" de la pagina cambia segun la solicitud del usuario
 function App() {
     const { pathname } = useLocation()
-    const esAdmin = pathname.startsWith('/admin')
+    const esAdmin = pathname.startsWith('/admin') || pathname.startsWith('/recepcion')
 
     return (
         <>
@@ -45,10 +47,12 @@ function App() {
                 <Route path="/admin/servicios"     element={<AdminServicios />} />
                 <Route path="/admin/citas"         element={<AdminCitas />} />
                 <Route path="/admin/usuarios"      element={<AdminUsuarios />} />
-                <Route path="/admin/reportes"      element={<AdminReportes />} />
-                <Route path="/admin/historial"     element={<AdminHistorial />} />
+                <Route path="/admin/reportes"          element={<AdminReportes />} />
+                <Route path="/admin/historial"         element={<AdminHistorial />} />
+                <Route path="/recepcion/citas"         element={<RecepcionCitas />} />
+                <Route path="/recepcion/fichas"        element={<RecepcionFichas />} />
                 {/* Captura cualquier ruta no definida y muestra la página 404 */}
-                <Route path="*"                    element={<NoEncontrada />} />
+                <Route path="*"                        element={<NoEncontrada />} />
             </Routes>
             <PiePagina esAdmin={esAdmin} />
         </>

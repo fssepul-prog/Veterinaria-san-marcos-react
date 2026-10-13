@@ -4,8 +4,10 @@ import { pacientes } from "../../data/pacientes";
 const especies = ["Todas", "Perro", "Gato", "Conejo", "Ave"];
 
 function AdminHistorial() {
+  // Estado que guarda la especie seleccionada como filtro; "Todas" muestra todos los pacientes
   const [especie, setEspecie] = useState("Todas");
 
+  // Si el filtro es "Todas" retorna la lista completa; si no, filtra por la especie seleccionada
   const visibles =
     especie === "Todas"
       ? pacientes

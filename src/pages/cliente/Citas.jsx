@@ -20,46 +20,47 @@ function Citas() {
   const [errores, setErrores] = useState({})
   const [enviado, setEnviado] = useState(false)
 
+  // Actualiza en tiempo real el campo del formulario que el usuario está escribiendo
   function manejarCambio(e) {
+    // ...form mantiene los valores anteriores; solo se reemplaza el campo que cambió
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
+  // Verifica que los campos obligatorios tengan datos antes de enviar la solicitud
   function validar() {
-    const e = {}
-    if (!form.nombre.trim())
-      e.nombre = 'El nombre es obligatorio.'
-    if (!form.email.trim())
-      e.email = 'El correo es obligatorio.'
+    const e = {} // objeto que acumulará un mensaje por cada campo inválido
+    if (!form.nombre.trim())   e.nombre   = 'El nombre es obligatorio.'
+    if (!form.email.trim())    e.email    = 'El correo es obligatorio.'
     else if (!/\S+@\S+\.\S+/.test(form.email))
-      e.email = 'El correo no tiene un formato válido.'
-    if (!form.telefono.trim())
-      e.telefono = 'El teléfono es obligatorio.'
-    if (!form.mascota.trim())
-      e.mascota = 'El nombre de la mascota es obligatorio.'
-    if (!form.especie)
-      e.especie = 'Selecciona la especie.'
-    if (!form.servicio)
-      e.servicio = 'Selecciona un servicio.'
-    return e
+                               e.email    = 'El correo no tiene un formato válido.'
+    if (!form.telefono.trim()) e.telefono = 'El teléfono es obligatorio.'
+    if (!form.mascota.trim())  e.mascota  = 'El nombre de la mascota es obligatorio.'
+    if (!form.especie)         e.especie  = 'Selecciona la especie.'
+    if (!form.servicio)        e.servicio = 'Selecciona un servicio.'
+    return e // si el objeto llega vacío, todos los campos son válidos
   }
 
+  // Maneja el clic en "Enviar solicitud": valida, guarda la cita y muestra confirmación
   function manejarEnvio(e) {
-    e.preventDefault()
+    e.preventDefault() // evita que el formulario recargue la página
     const nuevosErrores = validar()
     if (Object.keys(nuevosErrores).length > 0) {
-      setErrores(nuevosErrores)
+      setErrores(nuevosErrores) // muestra los errores y no continúa
       return
     }
+    // Lee las citas ya guardadas (o un arreglo vacío si no existe ninguna)
     const citas = JSON.parse(localStorage.getItem('citas') || '[]')
+    // Agrega la nueva cita con un id único basado en la hora actual
     citas.push({ ...form, id: Date.now() })
-    localStorage.setItem('citas', JSON.stringify(citas))
-    setEnviado(true)
+    localStorage.setItem('citas', JSON.stringify(citas)) // guarda la lista actualizada
+    setEnviado(true)  // cambia la vista al mensaje de confirmación
     setErrores({})
   }
 
+  // Limpia el formulario para que el usuario pueda enviar otra solicitud desde cero
   function nuevaSolicitud() {
-    setForm(ESTADO_INICIAL)
-    setEnviado(false)
+    setForm(ESTADO_INICIAL) // vuelve todos los campos a su valor vacío original
+    setEnviado(false)       // oculta el mensaje de confirmación y vuelve a mostrar el formulario
   }
 
   if (enviado) {

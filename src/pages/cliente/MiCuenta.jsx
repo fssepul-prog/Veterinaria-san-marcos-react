@@ -21,22 +21,26 @@ const HISTORIAL_DEMO = [
 ]
 
 function MiCuenta() {
+  // Lee la sesión de localStorage al montar el componente para saber si hay un usuario activo
   const [sesion, setSesion] = useState(() => {
     const guardada = localStorage.getItem('sesion')
-    return guardada ? JSON.parse(guardada) : null
+    return guardada ? JSON.parse(guardada) : null // si no hay sesión, queda como null
   })
   const [misCitas, setMisCitas] = useState([])
 
+  // Carga las citas del usuario activo cada vez que la sesión cambia
   useEffect(() => {
-    if (!sesion) return
+    if (!sesion) return // si no hay sesión, no hay citas que cargar
     const guardadas = JSON.parse(localStorage.getItem('citas') || '[]')
+    // Filtra solo las citas cuyo campo "nombre" coincide con el nombre del usuario activo
     setMisCitas(guardadas.filter((c) => c.nombre === sesion.nombre))
   }, [sesion])
 
+  // Elimina la sesión del navegador y limpia el estado para mostrar el aviso de acceso restringido
   function cerrarSesion() {
-    localStorage.removeItem('sesion')
-    setSesion(null)
-    setMisCitas([])
+    localStorage.removeItem('sesion') // borra la sesión guardada en el navegador
+    setSesion(null)    // actualiza el estado para que la pantalla cambie inmediatamente
+    setMisCitas([])    // limpia la lista de citas para que no quede visible al cerrar sesión
   }
 
   /* ── Sin sesión activa ── */

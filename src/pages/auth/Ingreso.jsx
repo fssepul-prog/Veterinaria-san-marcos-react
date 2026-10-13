@@ -22,7 +22,7 @@ const ESTADO_INICIAL = { email: '', contrasena: '' }
 
 const RUTA_POR_ROL = {
   Administrador: '/admin/servicios',
-  Recepcionista: '/admin/citas',
+  Recepcionista: '/recepcion/citas',
   Cliente:       '/mi-cuenta',
 }
 
@@ -31,43 +31,52 @@ function Ingreso() {
   const [form, setForm]       = useState(ESTADO_INICIAL)
   const [errores, setErrores] = useState({})
 
+  // Se ejecuta cada vez que el usuario escribe en un campo del formulario
   function manejarCambio(e) {
+    // ...form copia todos los valores actuales; [e.target.name] actualiza solo el campo que cambió
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
+  // Revisa que los campos tengan datos válidos antes de intentar ingresar
   function validar() {
-    const e = {}
+    const e = {} // objeto vacío que acumulará los mensajes de error
     if (!form.email.trim())
-      e.email = 'El correo es obligatorio.'
+      e.email = 'El correo es obligatorio.'             // campo vacío
     else if (!/\S+@\S+\.\S+/.test(form.email))
-      e.email = 'El correo no tiene un formato válido.'
+      e.email = 'El correo no tiene un formato válido.' // formato incorrecto
     if (!form.contrasena)
       e.contrasena = 'La contraseña es obligatoria.'
     else if (form.contrasena.length < 6)
       e.contrasena = 'La contraseña debe tener al menos 6 caracteres.'
-    return e
+    return e // si está vacío, no hay errores; si tiene claves, hay campos inválidos
   }
 
+  // Maneja el clic en "Ingresar": valida, busca el usuario y redirige según su rol
   function manejarEnvio(e) {
-    e.preventDefault()
+    e.preventDefault() // evita que el formulario recargue la página
     const nuevosErrores = validar()
     if (Object.keys(nuevosErrores).length > 0) {
+      // Si hay errores, los muestra en el formulario y detiene el proceso
       setErrores(nuevosErrores)
       return
     }
+    // Busca en la lista demo un usuario que coincida con email Y contraseña
     const usuario = USUARIOS_DEMO.find(
       (u) => u.email === form.email && u.contrasena === form.contrasena
     )
     if (!usuario) {
+      // Ningún usuario coincidió: muestra error de credenciales
       setErrores({ credenciales: 'Correo o contraseña incorrectos.' })
       return
     }
+    // Guarda solo los datos necesarios en localStorage (nunca la contraseña)
     localStorage.setItem('sesion', JSON.stringify({
       email: usuario.email,
       nombre: usuario.nombre,
       rol: usuario.rol,
     }))
     setErrores({})
+    // Redirige a la ruta correspondiente según el rol (Administrador, Recepcionista o Cliente)
     navigate(RUTA_POR_ROL[usuario.rol] ?? '/')
   }
 

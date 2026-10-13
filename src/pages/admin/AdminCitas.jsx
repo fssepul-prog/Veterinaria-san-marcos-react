@@ -8,29 +8,34 @@ const estados = ["Todas", "Pendiente", "Confirmada", "Cancelada"];
 function AdminCitas() {
   const [estado, setEstado] = useState("Todas");
 
+  // Carga inicial: usa las citas guardadas en localStorage o las del archivo de datos
   const [citas, setCitas] = useState(() => {
     const guardadas = localStorage.getItem("citas");
     return guardadas ? JSON.parse(guardadas) : citasIniciales;
   });
 
+  // Sincroniza la lista de citas con localStorage cada vez que cambia
   useEffect(() => {
     localStorage.setItem("citas", JSON.stringify(citas));
   }, [citas]);
 
+  // Muestra todas las citas o solo las del estado seleccionado (Pendiente, Confirmada, Cancelada)
   const visibles =
     estado === "Todas"
       ? citas
       : citas.filter((cita) => cita.estado === estado);
 
-  // map recorre las citas y cambia solo la que tiene el id recibido
+  // Cambia el estado de la cita con ese id a "Confirmada" sin modificar las demás
   function confirmar(id) {
     setCitas(
+      // .map() recorre todas las citas; solo cambia la que coincide con el id
       citas.map((cita) =>
         cita.id === id ? { ...cita, estado: "Confirmada" } : cita
       )
     );
   }
 
+  // Cambia el estado de la cita con ese id a "Cancelada" sin modificar las demás
   function cancelar(id) {
     setCitas(
       citas.map((cita) =>

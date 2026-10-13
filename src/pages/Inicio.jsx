@@ -7,7 +7,7 @@ import { servicios } from '../data/servicios.js'
 
 function Inicio() {
 
-  //muestra unicamente los primeros 3 elementos de la biblioteca de "servicios.js"
+  // .slice(0, 3) extrae solo los primeros 3 servicios del arreglo para la sección de destacados
   const serviciosDestacados = servicios.slice(0, 3)
 
   return (

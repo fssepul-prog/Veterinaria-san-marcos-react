@@ -18,12 +18,15 @@ function Registro() {
   const [errores, setErrores] = useState({})
   const [registrado, setRegistrado] = useState(false)
 
+  // Actualiza el campo del formulario que cambió sin borrar los demás valores
   function manejarCambio(e) {
+    // ...form copia el estado actual; [e.target.name] sobreescribe solo el campo que se editó
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
+  // Revisa que todos los campos sean válidos antes de registrar
   function validar() {
-    const e = {}
+    const e = {} // acumula los mensajes de error por campo
     if (!form.nombre.trim())
       e.nombre = 'El nombre es obligatorio.'
     if (!form.email.trim())
@@ -35,22 +38,25 @@ function Registro() {
     else if (form.contrasena.length < 6)
       e.contrasena = 'La contraseña debe tener al menos 6 caracteres.'
     if (form.confirmar !== form.contrasena)
-      e.confirmar = 'Las contraseñas no coinciden.'
+      e.confirmar = 'Las contraseñas no coinciden.' // compara los dos campos de contraseña
     return e
   }
 
+  // Maneja el clic en "Crear cuenta": valida, guarda en localStorage y muestra confirmación
   function manejarEnvio(e) {
-    e.preventDefault()
+    e.preventDefault() // evita recarga de página al enviar el formulario
     const nuevosErrores = validar()
     if (Object.keys(nuevosErrores).length > 0) {
-      setErrores(nuevosErrores)
+      setErrores(nuevosErrores) // muestra errores y detiene el proceso
       return
     }
     setErrores({})
+    // Lee la lista de usuarios ya guardada (o un arreglo vacío si no existe)
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]')
+    // Agrega el nuevo usuario (sin contraseña) con la fecha actual como marca de tiempo
     usuarios.push({ nombre: form.nombre, email: form.email, fechaRegistro: Date.now() })
-    localStorage.setItem('usuarios', JSON.stringify(usuarios))
-    setRegistrado(true)
+    localStorage.setItem('usuarios', JSON.stringify(usuarios)) // guarda la lista actualizada
+    setRegistrado(true) // cambia la vista al mensaje de confirmación
   }
 
   if (registrado) {

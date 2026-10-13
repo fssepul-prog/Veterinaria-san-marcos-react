@@ -7,22 +7,24 @@ function FormularioUsuario({ onGuardar }) {
   const [datos, setDatos] = useState(inicial);
   const [errores, setErrores] = useState({});
 
+  // Actualiza el campo del formulario que cambió manteniendo los demás intactos
   function cambiar(evento) {
-    const { name, value } = evento.target;
-    setDatos({ ...datos, [name]: value });
+    const { name, value } = evento.target; // nombre del input y su nuevo valor
+    setDatos({ ...datos, [name]: value });  // copia el estado y reemplaza solo ese campo
   }
 
+  // Maneja el clic en "Guardar": valida, llama al padre y limpia el formulario
   function enviar(evento) {
-    evento.preventDefault();
+    evento.preventDefault(); // evita recarga de página
     const nuevosErrores = {};
-    if (!datos.nombre.trim()) nuevosErrores.nombre = "Nombre obligatorio";
-    if (!datos.correo.trim()) nuevosErrores.correo = "Correo obligatorio";
+    if (!datos.nombre.trim())   nuevosErrores.nombre   = "Nombre obligatorio";
+    if (!datos.correo.trim())   nuevosErrores.correo   = "Correo obligatorio";
     if (!datos.telefono.trim()) nuevosErrores.telefono = "Teléfono obligatorio";
-    if (!datos.rol) nuevosErrores.rol = "Selecciona rol";
+    if (!datos.rol)             nuevosErrores.rol      = "Selecciona rol";
     setErrores(nuevosErrores);
-    if (Object.keys(nuevosErrores).length > 0) return;
-    onGuardar(datos);
-    setDatos(inicial);
+    if (Object.keys(nuevosErrores).length > 0) return; // detiene el proceso si hay campos inválidos
+    onGuardar(datos);   // envía los datos del nuevo usuario al componente padre (AdminUsuarios)
+    setDatos(inicial);  // limpia el formulario después de guardar
   }
 
   return (
