@@ -1,11 +1,3 @@
-/*
-  TarjetaServicio con clases Bootstrap Card.
-
-  Patrón equivalente en conecta-cultura: TarjetaActividad.jsx
-  Se reemplaza <article className="tarjeta"> por Bootstrap card h-100,
-  igual que TarjetaActividad usa <article className="card h-100">.
-*/
-
 import { Link } from 'react-router-dom'
 function TarjetaServicio({ servicio }) {
   return (

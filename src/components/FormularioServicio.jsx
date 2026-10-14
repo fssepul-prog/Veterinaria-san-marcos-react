@@ -3,39 +3,34 @@ import { Button, Form } from "react-bootstrap";
 
 const inicial = { codigo: "", nombre: "", categoria: "", duracion: "", precio: "" };
 
-// Props: servicioEditando (null cuando es un servicio nuevo), onGuardar y onCancelar
 function FormularioServicio({ servicioEditando, onGuardar, onCancelar }) {
   const [datos, setDatos] = useState(inicial);
   const [errores, setErrores] = useState({});
 
-  // Cuando se recibe un servicio para editar, carga sus datos en el formulario automáticamente
   useEffect(() => {
-    // Si viene un servicioEditando lo carga; si no (nuevo servicio), usa el formulario vacío
     setDatos(servicioEditando || inicial);
-    setErrores({}); // limpia los errores del formulario anterior al cambiar de servicio
-  }, [servicioEditando]); // se ejecuta cada vez que cambia el servicio a editar
+    setErrores({});
+  }, [servicioEditando]);
 
-  // Actualiza en tiempo real el campo que el usuario está escribiendo o seleccionando
   function cambiar(evento) {
-    const { name, value } = evento.target; // extrae el nombre del campo y su nuevo valor
-    setDatos({ ...datos, [name]: value }); // copia el estado actual y reemplaza solo ese campo
+    const { name, value } = evento.target;
+    setDatos({ ...datos, [name]: value });
   }
 
-  // Maneja el clic en "Guardar": valida los campos, llama al padre y limpia el formulario
   function enviar(evento) {
-    evento.preventDefault(); // evita recarga de página
+    evento.preventDefault();
     const nuevosErrores = {};
     if (!datos.codigo.trim())  nuevosErrores.codigo   = "Código obligatorio";
     if (!datos.nombre.trim())  nuevosErrores.nombre   = "Nombre obligatorio";
     if (!datos.categoria)      nuevosErrores.categoria = "Selecciona categoría";
     if (!datos.duracion.trim()) nuevosErrores.duracion = "Duración obligatoria";
-    // Number() convierte el texto del input a número para poder compararlo con 0
+    // precio viene como string del input; Number() permite comparar con 0
     if (datos.precio === "" || Number(datos.precio) < 0) nuevosErrores.precio = "Ingresa un precio (no puede ser negativo)";
     setErrores(nuevosErrores);
-    if (Object.keys(nuevosErrores).length > 0) return; // si hay errores, no continúa
-    // Convierte precio a número antes de enviarlo al componente padre (AdminServicios)
+    if (Object.keys(nuevosErrores).length > 0) return;
+    // convierte a número antes de enviar al padre para permitir formateo con toLocaleString
     onGuardar({ ...datos, precio: Number(datos.precio) });
-    setDatos(inicial); // limpia el formulario para el próximo servicio
+    setDatos(inicial);
   }
 
   return (

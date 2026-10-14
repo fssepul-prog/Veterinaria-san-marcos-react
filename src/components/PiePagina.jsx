@@ -1,11 +1,3 @@
-/*
-  PiePagina con Bootstrap.
-
-  Recibe la prop esAdmin desde App.jsx (que detecta la ruta con useLocation).
-  Si esAdmin es true muestra solo la línea de copyright, sin datos de
-  contacto ni enlaces, siguiendo el patrón de componente sin hooks de la guía.
-*/
-
 import { Col, Container, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 

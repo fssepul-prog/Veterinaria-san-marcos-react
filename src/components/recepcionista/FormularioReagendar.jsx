@@ -5,20 +5,17 @@ function FormularioReagendar({ cita, onGuardar, onCancelar }) {
   const [datos, setDatos] = useState({ fecha: cita.fecha })
   const [errores, setErrores] = useState({})
 
-  // Actualiza el campo de fecha cuando el usuario escribe en él
   function cambiar(evento) {
     const { name, value } = evento.target
-    setDatos({ ...datos, [name]: value }) // reemplaza el campo que cambió manteniendo el resto
+    setDatos({ ...datos, [name]: value })
   }
 
-  // Valida que la nueva fecha no esté vacía y la envía al componente padre
   function enviar(evento) {
-    evento.preventDefault() // evita recarga de página
+    evento.preventDefault()
     const nuevosErrores = {}
-    if (!datos.fecha.trim()) nuevosErrores.fecha = "Fecha obligatoria" // campo vacío
+    if (!datos.fecha.trim()) nuevosErrores.fecha = "Fecha obligatoria"
     setErrores(nuevosErrores)
-    if (Object.keys(nuevosErrores).length > 0) return // si hay error, no continúa
-    // Llama a reagendar en RecepcionCitas pasando el id de la cita y la nueva fecha
+    if (Object.keys(nuevosErrores).length > 0) return
     onGuardar(cita.id, datos.fecha)
   }
 

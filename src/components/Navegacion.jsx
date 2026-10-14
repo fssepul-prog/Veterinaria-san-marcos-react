@@ -1,35 +1,24 @@
-/*
-  Navegacion con React Bootstrap Navbar.
-
-  Modo público  → enlaces de la homepage + botones de autenticación por rol.
-  Modo admin    → solo enlaces del panel de administración + botón Salir.
-  La detección del modo usa pathname.startsWith('/admin').
-  La sesión se re-lee en cada cambio de ruta (useLocation como dependencia).
-*/
-
 import { useState, useEffect } from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 
 function Navegacion() {
-  const location           = useLocation()
-  const navigate           = useNavigate()
-  // true si la ruta actual pertenece al panel interno (admin o recepción)
-  const esAdmin            = location.pathname.startsWith('/admin') || location.pathname.startsWith('/recepcion')
+  const location            = useLocation()
+  const navigate            = useNavigate()
+  // Activa el menú interno cuando la ruta pertenece al panel admin o recepción
+  const esAdmin             = location.pathname.startsWith('/admin') || location.pathname.startsWith('/recepcion')
   const [sesion, setSesion] = useState(null)
 
-  // Se ejecuta cada vez que el usuario navega a una ruta distinta
+  // Re-lee la sesión en cada cambio de ruta para mantener el menú sincronizado
   useEffect(() => {
-    const guardada = localStorage.getItem('sesion') // lee la sesión guardada
-    // Si existe, la convierte de texto JSON a objeto; si no, deja sesion en null
+    const guardada = localStorage.getItem('sesion')
     setSesion(guardada ? JSON.parse(guardada) : null)
-  }, [location]) // location como dependencia hace que se re-ejecute en cada cambio de ruta
+  }, [location])
 
-  // Elimina la sesión y devuelve al usuario a la página de inicio
   function cerrarSesion() {
-    localStorage.removeItem('sesion') // borra la sesión del navegador
-    setSesion(null)                   // limpia el estado para que el menú se actualice
-    navigate('/')                     // redirige al inicio sin recargar la página
+    localStorage.removeItem('sesion')
+    setSesion(null)
+    navigate('/')
   }
 
   return (

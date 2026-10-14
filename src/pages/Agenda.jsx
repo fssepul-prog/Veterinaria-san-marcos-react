@@ -1,10 +1,3 @@
-/*
-  Agenda con useState para selección de día.
-  Muestra el horario semanal de la clínica.
-  useState controla el día seleccionado y filtra los horarios visibles.
-  Los datos son estáticos (objeto con días como claves).
-*/
-
 import { useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'

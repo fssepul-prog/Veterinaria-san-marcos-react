@@ -1,6 +1,3 @@
-// src/pages/admin/AdminHistorial.spec.jsx
-
-// Verifica que la página renderiza el heading y la tabla de pacientes registrados.
 import { render, screen } from "@testing-library/react"
 import AdminHistorial from "./AdminHistorial"
 

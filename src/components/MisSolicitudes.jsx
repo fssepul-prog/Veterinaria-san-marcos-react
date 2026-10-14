@@ -1,9 +1,3 @@
-/*
-  MisSolicitudes con clases Bootstrap.
-
-  Patrón equivalente en conecta-cultura: MisInscripciones.jsx
-*/
-
 import { Col, Row } from 'react-bootstrap'
 
 function MisSolicitudes({ solicitudes, onEliminar }) {

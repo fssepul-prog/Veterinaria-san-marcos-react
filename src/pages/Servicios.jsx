@@ -7,10 +7,8 @@ import { servicios } from '../data/servicios.js'
 const categorias = ['Todas', 'Consultas', 'Vacunación', 'Desparasitación', 'Cirugía', 'Otros']
 
 function Servicios() {
-  // Estado que guarda la categoría activa en el filtro; "Todas" muestra todo el catálogo
   const [categoria, setCategoria] = useState('Todas')
 
-  // Si el filtro es "Todas" retorna todos los servicios; si no, filtra por la categoría elegida
   const visibles =
     categoria === 'Todas'
       ? servicios

@@ -1,10 +1,3 @@
-/*
-  página 404 para la ruta comodín path="*".
-  Se muestra cuando ninguna ruta coincide con la URL actual,
-  o cuando DetalleServicio no encuentra el id en el array.
-  Link permite volver al inicio sin recargar la página.
-*/
-
 import { Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 

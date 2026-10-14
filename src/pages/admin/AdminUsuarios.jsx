@@ -4,34 +4,27 @@ import FormularioUsuario from "../../components/FormularioUsuario";
 import { usuariosIniciales } from "../../data/usuarios";
 
 function AdminUsuarios() {
-  // Carga inicial: usa los usuarios guardados en localStorage o los del archivo de datos
   const [usuarios, setUsuarios] = useState(() => {
     const guardados = localStorage.getItem("usuarios");
     return guardados ? JSON.parse(guardados) : usuariosIniciales;
   });
 
-  // Guarda la lista de usuarios en localStorage cada vez que se agrega o modifica uno
   useEffect(() => {
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
   }, [usuarios]);
 
-  // Agrega un nuevo usuario con un id generado a partir del tamaño actual de la lista
   function guardar(usuario) {
-    // usuarios.length + 1 garantiza que el id sea siempre mayor al último (no se reutiliza)
     setUsuarios([...usuarios, { ...usuario, id: usuarios.length + 1 }]);
   }
 
-  // Alterna el estado activo/inactivo del usuario con ese id
   function cambiarEstado(id) {
     setUsuarios(
-      // .map() recorre la lista; solo al usuario con ese id le invierte el valor de "activo"
       usuarios.map((usuario) =>
         usuario.id === id ? { ...usuario, activo: !usuario.activo } : usuario
       )
     );
   }
 
-  // Asigna un nuevo rol al usuario con ese id sin modificar sus otros datos
   function cambiarRol(id, rol) {
     setUsuarios(
       usuarios.map((usuario) =>

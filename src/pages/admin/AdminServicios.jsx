@@ -8,18 +8,15 @@ const categorias = ["Todas", "Consultas", "Vacunación", "Cirugía", "Desparasit
 function AdminServicios() {
   const [categoria, setCategoria] = useState("Todas");
 
-  // Carga inicial: si hay servicios guardados en localStorage los usa; si no, usa los del archivo
   const [servicios, setServicios] = useState(() => {
     const guardados = localStorage.getItem("servicios");
     return guardados ? JSON.parse(guardados) : serviciosIniciales;
   });
 
-  // Cada vez que la lista de servicios cambia, la guarda automáticamente en localStorage
   useEffect(() => {
     localStorage.setItem("servicios", JSON.stringify(servicios));
   }, [servicios]);
 
-  // Si no hay filtro activo muestra todos; si hay, filtra por la categoría seleccionada
   const visibles =
     categoria === "Todas"
       ? servicios
@@ -27,15 +24,12 @@ function AdminServicios() {
 
   // Agrega un servicio nuevo solo si su código no existe ya en la lista
   function guardar(servicio) {
-    // .some() recorre la lista y retorna true si algún elemento tiene el mismo código
     const yaExiste = servicios.some((item) => item.codigo === servicio.codigo);
-    if (yaExiste) return; // si ya existe, no hace nada (evita duplicados)
-    setServicios([...servicios, servicio]); // agrega el nuevo servicio al final de la lista
+    if (yaExiste) return;
+    setServicios([...servicios, servicio]);
   }
 
-  // Elimina el servicio cuyo código coincide con el recibido
   function eliminar(codigo) {
-    // .filter() crea un nuevo arreglo sin el elemento que tiene ese código
     setServicios(servicios.filter((item) => item.codigo !== codigo));
   }
 

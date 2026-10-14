@@ -9,33 +9,27 @@ const fichaVacia = { dueno: "", mascota: "", fecha: "", motivo: "", diagnostico:
 function RecepcionFichas() {
   const [editando, setEditando] = useState(null)
 
-  // Carga inicial: usa las fichas guardadas en localStorage o las del archivo de datos
   const [fichas, setFichas] = useState(() => {
     const guardadas = localStorage.getItem("fichas")
     return guardadas ? JSON.parse(guardadas) : fichasIniciales
   })
 
-  // Guarda la lista de fichas en localStorage cada vez que se agrega o modifica una
+  // Persiste las fichas entre recargas
   useEffect(() => {
     localStorage.setItem("fichas", JSON.stringify(fichas))
   }, [fichas])
 
-  // Agrega una ficha nueva con un id generado a partir del tamaño actual de la lista
   function registrar(ficha) {
-    // fichas.length + 1 asigna el siguiente número disponible como id
     setFichas([...fichas, { ...ficha, id: fichas.length + 1 }])
   }
 
-  // Reemplaza la ficha editada en la lista y cierra el formulario de edición
   function actualizar(ficha) {
-    // .map() devuelve una nueva lista reemplazando solo la ficha cuyo id coincide
     setFichas(fichas.map((item) => (item.id === ficha.id ? ficha : item)))
-    setEditando(null) // cierra el formulario de edición y vuelve a mostrar la tarjeta
+    setEditando(null)
   }
 
-  // Abre el formulario de edición para la ficha con ese id
   function empezarEditar(id) {
-    setEditando(id) // guarda el id de la ficha que se está editando
+    setEditando(id)
   }
 
   return (

@@ -1,15 +1,3 @@
-/*
-  MiCuenta — perfil del dueño de mascota.
-  Adaptación de mi-cuenta.html (Proyecto-veterinaria-main).
-
-  Lee la sesión guardada en localStorage ("sesion") para identificar al
-  usuario activo. Si no hay sesión, muestra un aviso con enlace a /ingreso.
-  Si hay sesión, muestra:
-    - Historial clínico de demostración (datos fijos, como en el original).
-    - Mis citas: leídas de localStorage ("citas"), filtradas por el nombre
-      del usuario activo (campo "nombre" que guarda Citas.jsx).
-*/
-
 import { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -21,29 +9,24 @@ const HISTORIAL_DEMO = [
 ]
 
 function MiCuenta() {
-  // Lee la sesión de localStorage al montar el componente para saber si hay un usuario activo
   const [sesion, setSesion] = useState(() => {
     const guardada = localStorage.getItem('sesion')
-    return guardada ? JSON.parse(guardada) : null // si no hay sesión, queda como null
+    return guardada ? JSON.parse(guardada) : null
   })
   const [misCitas, setMisCitas] = useState([])
 
-  // Carga las citas del usuario activo cada vez que la sesión cambia
   useEffect(() => {
-    if (!sesion) return // si no hay sesión, no hay citas que cargar
+    if (!sesion) return
     const guardadas = JSON.parse(localStorage.getItem('citas') || '[]')
-    // Filtra solo las citas cuyo campo "nombre" coincide con el nombre del usuario activo
     setMisCitas(guardadas.filter((c) => c.nombre === sesion.nombre))
   }, [sesion])
 
-  // Elimina la sesión del navegador y limpia el estado para mostrar el aviso de acceso restringido
   function cerrarSesion() {
-    localStorage.removeItem('sesion') // borra la sesión guardada en el navegador
-    setSesion(null)    // actualiza el estado para que la pantalla cambie inmediatamente
-    setMisCitas([])    // limpia la lista de citas para que no quede visible al cerrar sesión
+    localStorage.removeItem('sesion')
+    setSesion(null)
+    setMisCitas([])
   }
 
-  /* ── Sin sesión activa ── */
   if (!sesion) {
     return (
       <main>
@@ -66,12 +49,10 @@ function MiCuenta() {
     )
   }
 
-  /* ── Con sesión activa ── */
   return (
     <main>
       <Container className="py-4">
 
-        {/* ── Encabezado ── */}
         <header className="encabezado-pagina d-flex justify-content-between align-items-start flex-wrap gap-2">
           <div>
             <p className="etiqueta">Bienvenido, {sesion.nombre}</p>
@@ -89,7 +70,6 @@ function MiCuenta() {
           </button>
         </header>
 
-        {/* ── Historial clínico ── */}
         <section aria-labelledby="titulo-historial" className="mb-5">
           <h2 id="titulo-historial">Historial clínico</h2>
           <p className="text-muted mb-3">
@@ -118,7 +98,6 @@ function MiCuenta() {
           </div>
         </section>
 
-        {/* ── Mis citas solicitadas ── */}
         <section aria-labelledby="titulo-mis-citas">
           <h2 id="titulo-mis-citas">Mis citas solicitadas</h2>
           <div className="tabla-contenedor">

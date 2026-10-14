@@ -10,51 +10,44 @@ function RecepcionCitas() {
   const [estado, setEstado] = useState("Todas")
   const [reagendando, setReagendando] = useState(null)
 
-  // Carga inicial: usa las citas guardadas en localStorage o las del archivo de datos
   const [citas, setCitas] = useState(() => {
     const guardadas = localStorage.getItem("citas")
     return guardadas ? JSON.parse(guardadas) : citasIniciales
   })
 
-  // Persiste la lista de citas en localStorage cada vez que se modifica
+  // Persiste las citas entre recargas
   useEffect(() => {
     localStorage.setItem("citas", JSON.stringify(citas))
   }, [citas])
 
-  // Muestra todas las citas o solo las del estado elegido en el filtro
   const visibles =
     estado === "Todas"
       ? citas
       : citas.filter((cita) => cita.estado === estado)
 
-  // Cambia el estado de la cita con ese id a "Confirmada" manteniendo el resto igual
   function confirmar(id) {
     setCitas(
-      // .map() devuelve una nueva lista; solo la cita con ese id recibe el cambio
       citas.map((cita) =>
         cita.id === id ? { ...cita, estado: "Confirmada" } : cita
       )
     )
   }
 
-  // Actualiza la fecha de la cita con ese id y cierra el formulario de reagendado
   function reagendar(id, fecha) {
     setCitas(
       citas.map((cita) =>
-        cita.id === id ? { ...cita, fecha } : cita // reemplaza solo el campo fecha
+        cita.id === id ? { ...cita, fecha } : cita
       )
     )
-    setReagendando(null) // cierra el formulario de reagendado para esa cita
+    setReagendando(null)
   }
 
-  // Abre el formulario de reagendado para la cita con ese id
   function empezarReagendar(id) {
-    setReagendando(id) // guarda el id de la cita que se está reagendando
+    setReagendando(id)
   }
 
-  // Cierra el formulario de reagendado sin guardar cambios
   function cancelarReagendar() {
-    setReagendando(null) // vuelve a mostrar la tarjeta normal de la cita
+    setReagendando(null)
   }
 
   return (

@@ -2,16 +2,13 @@ import { medicamentos } from "../../data/medicamentos";
 import { reportes } from "../../data/reportes";
 
 function AdminReportes() {
-  // Acumuladores para calcular los totales generales al recorrer todos los reportes
   let totalAtenciones = 0;
   let totalIngresos = 0;
-  // for...of recorre cada reporte y va sumando sus valores a los totales
   for (const reporte of reportes) {
-    totalAtenciones = totalAtenciones + reporte.atenciones;                    // suma la cantidad de atenciones
-    totalIngresos = totalIngresos + reporte.atenciones * reporte.precio;       // multiplica atenciones por precio para obtener ingreso por servicio
+    totalAtenciones = totalAtenciones + reporte.atenciones;
+    totalIngresos = totalIngresos + reporte.atenciones * reporte.precio;
   }
 
-  // Filtra solo los medicamentos con stock igual o menor a 20 unidades para alertar al administrador
   const stockBajo = medicamentos.filter((medicamento) => medicamento.stock <= 20);
 
   return (

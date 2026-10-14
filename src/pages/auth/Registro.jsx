@@ -1,12 +1,3 @@
-/*
-  Guía 11 — Registro (Sign Up): formulario controlado con validación.
-
-  Simula la creación de cuenta guardando {nombre, email, fechaRegistro}
-  en localStorage bajo la clave 'usuarios'.  La contraseña NO se almacena.
-  El acceso al sistema solo funciona con los usuarios preestablecidos en
-  Ingreso.jsx; el registro demuestra el flujo pero no otorga acceso aún.
-*/
-
 import { useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -18,15 +9,12 @@ function Registro() {
   const [errores, setErrores] = useState({})
   const [registrado, setRegistrado] = useState(false)
 
-  // Actualiza el campo del formulario que cambió sin borrar los demás valores
   function manejarCambio(e) {
-    // ...form copia el estado actual; [e.target.name] sobreescribe solo el campo que se editó
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  // Revisa que todos los campos sean válidos antes de registrar
   function validar() {
-    const e = {} // acumula los mensajes de error por campo
+    const e = {}
     if (!form.nombre.trim())
       e.nombre = 'El nombre es obligatorio.'
     if (!form.email.trim())
@@ -38,25 +26,23 @@ function Registro() {
     else if (form.contrasena.length < 6)
       e.contrasena = 'La contraseña debe tener al menos 6 caracteres.'
     if (form.confirmar !== form.contrasena)
-      e.confirmar = 'Las contraseñas no coinciden.' // compara los dos campos de contraseña
+      e.confirmar = 'Las contraseñas no coinciden.'
     return e
   }
 
-  // Maneja el clic en "Crear cuenta": valida, guarda en localStorage y muestra confirmación
   function manejarEnvio(e) {
-    e.preventDefault() // evita recarga de página al enviar el formulario
+    e.preventDefault()
     const nuevosErrores = validar()
     if (Object.keys(nuevosErrores).length > 0) {
-      setErrores(nuevosErrores) // muestra errores y detiene el proceso
+      setErrores(nuevosErrores)
       return
     }
     setErrores({})
-    // Lee la lista de usuarios ya guardada (o un arreglo vacío si no existe)
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]')
-    // Agrega el nuevo usuario (sin contraseña) con la fecha actual como marca de tiempo
+    // La contraseña no se almacena
     usuarios.push({ nombre: form.nombre, email: form.email, fechaRegistro: Date.now() })
-    localStorage.setItem('usuarios', JSON.stringify(usuarios)) // guarda la lista actualizada
-    setRegistrado(true) // cambia la vista al mensaje de confirmación
+    localStorage.setItem('usuarios', JSON.stringify(usuarios))
+    setRegistrado(true)
   }
 
   if (registrado) {

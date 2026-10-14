@@ -2,46 +2,38 @@ import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import TarjetaCita from "../../components/TarjetaCita";
 import { citasIniciales } from "../../data/citas";
+import { guardarCitas } from "../../utils/guardarCitas";
 
 const estados = ["Todas", "Pendiente", "Confirmada", "Cancelada"];
 
 function AdminCitas() {
   const [estado, setEstado] = useState("Todas");
 
-  // Carga inicial: usa las citas guardadas en localStorage o las del archivo de datos
+  // Persiste el estado entre recargas
   const [citas, setCitas] = useState(() => {
     const guardadas = localStorage.getItem("citas");
     return guardadas ? JSON.parse(guardadas) : citasIniciales;
   });
 
-  // Sincroniza la lista de citas con localStorage cada vez que cambia
   useEffect(() => {
-    localStorage.setItem("citas", JSON.stringify(citas));
+    guardarCitas(citas);
   }, [citas]);
 
-  // Muestra todas las citas o solo las del estado seleccionado (Pendiente, Confirmada, Cancelada)
   const visibles =
     estado === "Todas"
       ? citas
       : citas.filter((cita) => cita.estado === estado);
 
-  // Cambia el estado de la cita con ese id a "Confirmada" sin modificar las demás
   function confirmar(id) {
-    setCitas(
-      // .map() recorre todas las citas; solo cambia la que coincide con el id
-      citas.map((cita) =>
-        cita.id === id ? { ...cita, estado: "Confirmada" } : cita
-      )
-    );
+    setCitas(citas.map((cita) =>
+      cita.id === id ? { ...cita, estado: "Confirmada" } : cita
+    ));
   }
 
-  // Cambia el estado de la cita con ese id a "Cancelada" sin modificar las demás
   function cancelar(id) {
-    setCitas(
-      citas.map((cita) =>
-        cita.id === id ? { ...cita, estado: "Cancelada" } : cita
-      )
-    );
+    setCitas(citas.map((cita) =>
+      cita.id === id ? { ...cita, estado: "Cancelada" } : cita
+    ));
   }
 
   return (

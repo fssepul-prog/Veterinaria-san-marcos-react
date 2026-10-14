@@ -5,26 +5,23 @@ function FormularioFicha({ ficha, onGuardar }) {
   const [datos, setDatos] = useState(ficha)
   const [errores, setErrores] = useState({})
 
-  // Actualiza el campo del formulario que el usuario está escribiendo
   function cambiar(evento) {
-    const { name, value } = evento.target // nombre del input y su nuevo valor
-    setDatos({ ...datos, [name]: value })  // copia el estado y reemplaza solo ese campo
+    const { name, value } = evento.target
+    setDatos({ ...datos, [name]: value })
   }
 
-  // Valida todos los campos y, si son correctos, guarda la ficha y limpia el formulario
   function enviar(evento) {
-    evento.preventDefault() // evita recarga de página al hacer clic en Guardar
+    evento.preventDefault()
     const nuevosErrores = {}
-    // Verifica que ningún campo obligatorio esté vacío
     if (!datos.dueno.trim())       nuevosErrores.dueno       = "Dueño obligatorio"
     if (!datos.mascota.trim())     nuevosErrores.mascota     = "Mascota obligatoria"
     if (!datos.fecha.trim())       nuevosErrores.fecha       = "Fecha obligatoria"
     if (!datos.motivo.trim())      nuevosErrores.motivo      = "Motivo obligatorio"
     if (!datos.diagnostico.trim()) nuevosErrores.diagnostico = "Diagnóstico obligatorio"
     setErrores(nuevosErrores)
-    if (Object.keys(nuevosErrores).length > 0) return // si hay errores, no continúa
-    onGuardar(datos)   // envía la ficha al componente padre (RecepcionFichas)
-    setDatos(ficha)    // limpia el formulario volviendo a los valores iniciales recibidos por props
+    if (Object.keys(nuevosErrores).length > 0) return
+    onGuardar(datos)
+    setDatos(ficha)
   }
 
   return (

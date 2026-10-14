@@ -1,4 +1,3 @@
-//apartado referente a informacion para la tenencia responsable
 import { Col, Container, Row } from 'react-bootstrap'
 
 function Recursos() {
@@ -36,7 +35,7 @@ function Recursos() {
                   <h3 className="card-title h6">Vacunas al día</h3>
                   <p className="card-text">
                     Respeta el calendario de refuerzos anuales, especialmente la
-                    vacuna antirrábica, obligatoria por ley.
+                    vacuna antirrábica, ya que es obligatoria por ley.
                   </p>
                 </div>
               </article>

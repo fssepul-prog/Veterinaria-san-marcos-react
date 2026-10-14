@@ -1,13 +1,3 @@
-/*
-  DetalleServicio con useParams.
-
-  useParams extrae el parámetro :id de la URL /servicios/:id.
-  .find() localiza el servicio en el array por su id.
-  Si el id no existe se muestra NoEncontrada sin redirigir,
-  lo que mantiene la URL visible para depuración.
-
-*/
-
 import { useParams, Link } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 import { servicios } from '../data/servicios.js'

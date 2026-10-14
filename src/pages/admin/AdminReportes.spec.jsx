@@ -1,5 +1,3 @@
-// src/pages/admin/AdminReportes.spec.jsx
-// Verifica que la página renderiza el heading y los datos del reporte de atenciones.
 import { render, screen } from "@testing-library/react"
 import AdminReportes from "./AdminReportes"
 
