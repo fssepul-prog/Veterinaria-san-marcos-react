@@ -18,6 +18,7 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.18.4"
   },
+  //se añade correccion de version npm 20
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.3",
