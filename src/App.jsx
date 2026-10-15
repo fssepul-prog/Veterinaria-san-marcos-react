@@ -19,6 +19,8 @@ import AdminReportes from './pages/admin/AdminReportes'
 import AdminHistorial from './pages/admin/AdminHistorial'
 import RecepcionCitas from './pages/recepcionista/RecepcionCitas'
 import RecepcionFichas from './pages/recepcionista/RecepcionFichas'
+import DetalleFicha from "./pages/admin/DetalleFicha";
+
 
 function App() {
     const { pathname } = useLocation()
@@ -45,6 +47,7 @@ function App() {
                 <Route path="/admin/historial"         element={<AdminHistorial />} />
                 <Route path="/recepcion/citas"         element={<RecepcionCitas />} />
                 <Route path="/recepcion/fichas"        element={<RecepcionFichas />} />
+                <Route path="/admin/historial/:id" element={<DetalleFicha />} />
                 <Route path="*"                        element={<NoEncontrada />} />
             </Routes>
             <PiePagina esAdmin={esAdmin} />

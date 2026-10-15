@@ -1,20 +1,21 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { pacientes } from "../../data/pacientes";
-
+ 
 const especies = ["Todas", "Perro", "Gato", "Conejo", "Ave"];
-
+ 
 function AdminHistorial() {
   const [especie, setEspecie] = useState("Todas");
-
+ 
   const visibles =
     especie === "Todas"
       ? pacientes
       : pacientes.filter((paciente) => paciente.especie === especie);
-
+ 
   return (
     <main className="container py-4">
       <h1 className="mb-4">Historial clínico de pacientes</h1>
-
+ 
       <section aria-labelledby="titulo-filtro" className="mb-4">
         <h2 id="titulo-filtro" className="h5">Filtrar por especie</h2>
         <div className="d-flex flex-wrap gap-2 mt-2">
@@ -29,7 +30,7 @@ function AdminHistorial() {
           ))}
         </div>
       </section>
-
+ 
       <div className="table-responsive">
         <table className="table table-bordered table-hover">
           <caption>Pacientes registrados</caption>
@@ -50,9 +51,12 @@ function AdminHistorial() {
                 <td>{paciente.dueno}</td>
                 <td>{paciente.ultimaAtencion}</td>
                 <td>
-                  <button className="btn btn-outline-success btn-sm" disabled>
+                  <Link
+                    className="btn btn-outline-success btn-sm"
+                    to={`/admin/historial/${paciente.id}`}
+                  >
                     Ver ficha
-                  </button>
+                  </Link>
                 </td>
               </tr>
             ))}
@@ -62,5 +66,5 @@ function AdminHistorial() {
     </main>
   );
 }
-
+ 
 export default AdminHistorial;

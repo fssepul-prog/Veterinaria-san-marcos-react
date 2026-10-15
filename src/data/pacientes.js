@@ -1,8 +1,8 @@
 export const pacientes = [
-  { id: 1, mascota: "Firulais", especie: "Perro",  dueno: "Carlos Mora",      ultimaAtencion: "2026-09-28" },
-  { id: 2, mascota: "Luna",     especie: "Gato",   dueno: "Ana Pérez",        ultimaAtencion: "2026-10-05" },
-  { id: 3, mascota: "Michi",    especie: "Gato",   dueno: "Jorge Soto",       ultimaAtencion: "2026-09-15" },
-  { id: 4, mascota: "Rex",      especie: "Perro",  dueno: "Rodrigo Neira",    ultimaAtencion: "2026-10-01" },
-  { id: 5, mascota: "Coco",     especie: "Conejo", dueno: "Valentina Díaz",   ultimaAtencion: "2026-09-20" },
-  { id: 6, mascota: "Piolín",   especie: "Ave",    dueno: "Manuel Castro",    ultimaAtencion: "2026-08-30" },
+  { id: 1, mascota: "Firulais", especie: "Perro",  dueno: "Carlos Mora",    ultimaAtencion: "2026-09-28", diagnostico: "Dermatitis leve.",           medicamento: "Meloxicam 1mg", vacuna: "Nobivac Rabies, próxima el 2027-03-12", proximoControl: "2026-12-15" },
+  { id: 2, mascota: "Luna",     especie: "Gato",   dueno: "Ana Pérez",      ultimaAtencion: "2026-10-05", diagnostico: "Control sin observaciones.", medicamento: "Ninguno",       vacuna: "Felocell CVR, próxima el 2027-10-05",   proximoControl: "2027-10-05" },
+  { id: 3, mascota: "Michi",    especie: "Gato",   dueno: "Jorge Soto",     ultimaAtencion: "2026-09-15", diagnostico: "Control de peso normal.",    medicamento: "Ninguno",       vacuna: "Sin vacunas registradas",               proximoControl: "2027-03-15" },
+  { id: 4, mascota: "Rex",      especie: "Perro",  dueno: "Rodrigo Neira",  ultimaAtencion: "2026-10-01", diagnostico: "Otitis leve.",               medicamento: "Gotas óticas",  vacuna: "Nobivac Rabies, próxima el 2027-10-01", proximoControl: "2026-11-01" },
+  { id: 5, mascota: "Coco",     especie: "Conejo", dueno: "Valentina Díaz", ultimaAtencion: "2026-09-20", diagnostico: "Control general sin observaciones.", medicamento: "Ninguno", vacuna: "Sin vacunas registradas",             proximoControl: "2027-03-20" },
+  { id: 6, mascota: "Piolín",   especie: "Ave",    dueno: "Manuel Castro",  ultimaAtencion: "2026-08-30", diagnostico: "Revisión general sin observaciones.", medicamento: "Ninguno", vacuna: "Sin vacunas registradas",             proximoControl: "2027-02-28" },
 ]
