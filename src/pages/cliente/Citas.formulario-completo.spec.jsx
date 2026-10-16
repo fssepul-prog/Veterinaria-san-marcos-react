@@ -20,5 +20,7 @@ describe("Citas - formulario", () => {
     await usuario.selectOptions(screen.getByLabelText(/servicio solicitado/i), servicios[0].nombre);
     await usuario.click(screen.getByRole("button", { name: /enviar solicitud/i }));
     expect(screen.getByText(/solicitud enviada/i)).toBeInTheDocument();
+    const citas = JSON.parse(localStorage.getItem("citas"));
+    expect(citas[citas.length - 1].mascota).toBe("Firulais");
   });
 });

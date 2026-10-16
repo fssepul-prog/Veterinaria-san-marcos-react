@@ -23,5 +23,8 @@ describe("Ingreso - autenticación", () => {
     await usuario.type(screen.getByLabelText(/contraseña/i), "admin123");
     await usuario.click(screen.getByRole("button", { name: /ingresar/i }));
     expect(screen.getByText("Panel de administración")).toBeInTheDocument();
+    const sesion = JSON.parse(localStorage.getItem("sesion"));
+    expect(sesion.rol).toBe("Administrador");
+    expect(sesion.email).toBe("admin@sanmarcos.cl");
   });
 });

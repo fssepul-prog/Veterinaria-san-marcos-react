@@ -13,5 +13,6 @@ describe("AdminCitas - confirmar", () => {
     const botonesAntes = screen.getAllByRole("button", { name: /confirmar/i });
     await usuario.click(botonesAntes[0]);
     expect(screen.queryAllByRole("button", { name: /confirmar/i })).toHaveLength(botonesAntes.length - 1);
+    expect(screen.getAllByText(/Estado: Confirmada/i)).toHaveLength(3);
   });
 });

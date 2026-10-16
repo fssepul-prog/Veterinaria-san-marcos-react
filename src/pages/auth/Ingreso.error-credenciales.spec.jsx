@@ -15,5 +15,6 @@ describe("Ingreso - autenticación", () => {
     await usuario.type(screen.getByLabelText(/contraseña/i), "wrongpass");
     await usuario.click(screen.getByRole("button", { name: /ingresar/i }));
     expect(screen.getByText(/correo o contraseña incorrectos/i)).toBeInTheDocument();
+    expect(localStorage.getItem("sesion")).toBeNull();
   });
 });

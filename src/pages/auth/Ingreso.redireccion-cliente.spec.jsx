@@ -23,5 +23,8 @@ describe("Ingreso - autenticación", () => {
     await usuario.type(screen.getByLabelText(/contraseña/i), "cliente123");
     await usuario.click(screen.getByRole("button", { name: /ingresar/i }));
     expect(screen.getByText("Mi cuenta")).toBeInTheDocument();
+    const sesion = JSON.parse(localStorage.getItem("sesion"));
+    expect(sesion.rol).toBe("Cliente");
+    expect(sesion.email).toBe("cliente@sanmarcos.cl");
   });
 });
