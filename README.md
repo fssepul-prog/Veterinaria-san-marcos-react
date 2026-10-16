@@ -59,13 +59,13 @@ npm run coverage
 ### Resultados actuales
 
 ```
-Test Files  54 passed (54)
-Tests       55 passed (55)
+Test Files  68 passed (68)
+Tests       72 passed (72)
 
-Statements  : 95.59%
-Branches    : 90.63%
-Functions   : 75.00%
-Lines       : 95.59%
+Statements  : 98.54%
+Branches    : 94.21%
+Functions   : 97.50%
+Lines       : 98.54%
 ```
 
 ---
@@ -169,20 +169,28 @@ src/
 
 ## Cobertura de pruebas por tipo
 
-Las 55 pruebas cubren los 10 tipos requeridos por las guías 13 y 14:
+Las 72 pruebas cubren los 10 tipos requeridos por las guías 13 y 14 y los amplían:
 
-| # | Tipo | Archivo de prueba |
+| # | Tipo | Ejemplo de archivo |
 |---|---|---|
 | 1 | Función pura | `validaciones.email-valido.spec.jsx` |
-| 2 | Función pura | `validaciones.email-invalido.spec.jsx` |
-| 3 | Renderizado de datos | `TarjetaCita.muestra-datos.spec.jsx` |
-| 4 | Renderizado condicional | `AdminCitas.confirma-cita.spec.jsx` |
-| 5 | Estado vacío / sin sesión | `MiCuenta.sin-sesion.spec.jsx` |
-| 6 | Props recibidas con exactitud | `FormularioFicha.guarda-datos.spec.jsx` |
-| 7 | Evento (clic llama callback) | `TarjetaCita.llama-callbacks.spec.jsx` |
+| 2 | Función pura (caso inválido) | `validaciones.email-invalido.spec.jsx` |
+| 3 | Renderizado de datos (props) | `TarjetaCita.muestra-datos.spec.jsx` |
+| 4 | Renderizado condicional | `MiCuenta.sin-sesion.spec.jsx` |
+| 5 | Validación — errores en formulario | `FormularioFicha.errores.spec.jsx` |
+| 6 | Submit válido llama callback (`vi.fn`) | `FormularioFicha.guarda-datos.spec.jsx` |
+| 7 | Evento clic llama callback con id | `TarjetaCita.llama-callbacks.spec.jsx` |
 | 8 | Estado / filtro dinámico | `RecepcionCitas.filtro-estado.spec.jsx` |
-| 9 | Persistencia con `vi.spyOn` | `guardarCitas.spec.js` |
-| 10 | Mock asíncrono con `vi.fn().mockResolvedValue` | `cargarCitas.spec.js` |
+| 9 | Persistencia con `vi.spyOn` (Guía 14) | `RecepcionCitas.persiste-localStorage.spec.jsx` |
+| 10 | Mock asíncrono `vi.fn().mockResolvedValue` | `cargarCitas.spec.js` |
+| 11 | Flujo completo: abrir → guardar → cerrar | `RecepcionCitas.reagenda-cita.spec.jsx` |
+| 12 | Flujo completo: editar registro existente | `RecepcionFichas.editar-ficha.spec.jsx` |
+| 13 | Cancelar acción revierte estado | `RecepcionCitas.cancela-reagendar.spec.jsx` |
+| 14 | Filtro por categoría / especie | `AdminHistorial.filtro-especie.spec.jsx` |
+| 15 | Eliminar elemento de lista | `AdminServicios.elimina-servicio.spec.jsx` |
+| 16 | Cambio de select actualiza estado | `AdminUsuarios.cambia-rol.spec.jsx` |
+| 17 | Sesión condiciona menú renderizado | `Navegacion.administrador.spec.jsx` |
+| 18 | Cerrar sesión limpia estado y navega | `Navegacion.administrador.spec.jsx` |
 
 ---
 
