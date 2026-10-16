@@ -5,6 +5,14 @@ Aplicación web de una sola página (SPA) para la gestión de citas, fichas clí
 
 ---
 
+## Demo en producción
+
+**URL:** [http://ec2-18-212-99-49.compute-1.amazonaws.com](http://ec2-18-212-99-49.compute-1.amazonaws.com)
+
+Aplicación desplegada en una instancia **Amazon EC2** (Amazon Web Services).
+
+---
+
 ## Stack tecnológico
 
 | Capa | Tecnología |
@@ -16,6 +24,7 @@ Aplicación web de una sola página (SPA) para la gestión de citas, fichas clí
 | Pruebas unitarias | Vitest 2 + React Testing Library 16 |
 | Entorno de pruebas | jsdom + @testing-library/jest-dom |
 | Cobertura | @vitest/coverage-v8 |
+| Despliegue | Amazon EC2 (AWS) |
 
 > Vitest reemplaza a Jasmine/Karma según lo autorizado en la Guía 13 de la asignatura.
 
@@ -215,9 +224,10 @@ test: {
 
 ---
 
-## Repositorio
+## Repositorio y despliegue
 
-**GitHub:** [fssepul-prog/Veterinaria-san-marcos-react](https://github.com/fssepul-prog/Veterinaria-san-marcos-react)
+**GitHub:** [fssepul-prog/Veterinaria-san-marcos-react](https://github.com/fssepul-prog/Veterinaria-san-marcos-react)  
+**Demo AWS:** [http://ec2-18-212-99-49.compute-1.amazonaws.com](http://ec2-18-212-99-49.compute-1.amazonaws.com)
 
 ---
 
